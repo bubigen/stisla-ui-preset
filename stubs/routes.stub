@@ -1,0 +1,9 @@
+
+Route::group(['middleware' => ['auth']], function() {
+	Route::group(['prefix' => 'profile', 'as' => 'profile.'], function() {
+        Route::get('/', 'ProfileController@showProfileForm')->name('edit');
+        Route::post('/', 'ProfileController@updateProfile')->name('update');
+        Route::get('/change-password', 'ProfileController@showPasswordForm')->name('password.change');
+        Route::post('/change-password', 'ProfileController@updatePassword')->name('password.update');
+    });
+});

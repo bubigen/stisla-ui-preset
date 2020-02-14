@@ -1,0 +1,34 @@
+{
+    "name": "bubigen/stisla-ui-preset",
+    "description": "Laravel custom UI Preset from Stisla Open Source",
+    "type": "library",
+    "keywords": ["laravel", "preset", "stisla"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Boobalan K",
+            "email": "rkboobalan89@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.1.3",
+        "laravel/ui": "^1.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Bubigen\\LaravelUi\\Stisla\\": "src/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Bubigen\\LaravelUi\\Stisla\\StislaUiPresetServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

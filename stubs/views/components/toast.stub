@@ -1,0 +1,21 @@
+@if (session('message'))
+    @push('script_doc_ready')
+        @php
+        $color = "blue";
+        $type = session('message_type');
+        if ($type == 'success') {
+            $color = 'green';
+        } else if ($type == 'danger') {
+            $color = 'red';
+        } else {
+            $color = 'blue';
+        }
+        @endphp
+        iziToast.show({
+            color: '{{ $color }}',
+            title: "@if(session()->has('message_type')) {{ ucwords($type) }} @else 'Success' @endif",
+            message: '{{ session('message') }}',
+            position: 'topRight'
+        });
+    @endpush
+@endif

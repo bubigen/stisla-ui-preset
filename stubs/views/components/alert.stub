@@ -1,0 +1,5 @@
+@if (session('message'))
+<div class="alert alert-@if(session()->has('message_type')){{ session('message_type') }} @else 'success' @endif">
+    {{ session('message') }}
+</div>
+@endif

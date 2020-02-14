@@ -1,0 +1,87 @@
+<?php
+
+namespace {{namespace}}Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use {{namespace}}Http\Controllers\Controller;
+use {{namespace}}Http\Requests\Profile\ChangePasswordRequest;
+
+class ProfileController extends Controller
+{
+    /**
+     * Show the profile form.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function showProfileForm(Request $request)
+    {
+        return view('profile.edit', ['user' => $request->user()]);
+    }
+
+    /**
+     * Update the profile.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function updateProfile(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+        ]);
+
+        $user = $request->user();
+
+        try {
+            $user->fill($request->all());
+            $user->email = $request->get('email');
+            $user->save();
+            return redirect()->route('profile.edit')
+                        ->with('message_type', 'success')
+                        ->with('message', __('Profile updated successfully'));
+        } catch (\Exception $e) {
+            \Log::error('Cannot update profile: '.$e->getMessage());
+            return redirect()->back()->withInput()
+                        ->with('message_type', 'error')
+                        ->with('message', __('Could not update the profile'));
+        }
+    }
+
+    /**
+     * Show the password update form.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function showPasswordForm(Request $request)
+    {
+        return view('profile.password');
+    }
+
+    /**
+     * Update the password.
+     *
+     * @param  \App\Http\Requests\ChangePasswordRequest $request
+     * @return \Illuminate\Http\Response
+     */
+    public function updatePassword(ChangePasswordRequest $request)
+    {
+        $user = $request->user();
+
+        try {
+            $user->password = Hash::make($request->get('password'));
+            $user->save();
+            return redirect()->route('profile.password.change')
+                        ->with('message_type', 'success')
+                        ->with('message', __('Password changed successfully'));
+        } catch (\Exception $e) {
+            \Log::error('Cannot update password: '.$e->getMessage());
+            return redirect()->back()->withInput()
+                        ->with('message_type', 'error')
+                        ->with('message', __('Could not change the password'));
+        }
+    }
+}
