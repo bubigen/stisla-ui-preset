@@ -38,6 +38,7 @@ class StislaAuth extends AuthCommand
         'profile/password.stub' => 'profile/password.blade.php',
         'components/alert.stub' => 'components/alert.blade.php',
         'components/toast.stub' => 'components/toast.blade.php',
+        'scripts/datatables.stub' => 'scripts/datatables.blade.php',
     ];
 
     /**
@@ -73,6 +74,10 @@ class StislaAuth extends AuthCommand
         }
 
         if (! is_dir($directory = $this->getViewPath('components'))) {
+            mkdir($directory, 0755, true);
+        }
+
+        if (! is_dir($directory = $this->getViewPath('scripts'))) {
             mkdir($directory, 0755, true);
         }
         

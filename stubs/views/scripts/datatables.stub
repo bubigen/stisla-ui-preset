@@ -1,0 +1,11 @@
+@push('style_libraries')
+<<link rel="stylesheet" href="{{ asset('libraries/datatables/css/jquery.dataTables.min.css') }}">
+<<link rel="stylesheet" href="{{ asset('libraries/datatables/css/dataTables.bootstrap4.min.css') }}">
+<<link rel="stylesheet" href="{{ asset('libraries/select/css/select.bootstrap4.min.css') }}">
+@endpush
+
+@push('script_libraries')
+<script type="text/javascript" src="{{ asset('libraries/datatables/js/jquery.dataTables.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('libraries/datatables/js/dataTables.bootstrap4.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('libraries/select/js/dataTables.select.min.js') }}"></script>
+@endpush
