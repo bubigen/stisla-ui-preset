@@ -3,9 +3,9 @@
 namespace Bubigen\LaravelUi\Stisla;
 
 use Illuminate\Support\Arr;
+use Laravel\Ui\Presets\Preset;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Foundation\Console\Presets\Preset;
 
 class StislaPreset extends Preset
 {
@@ -103,6 +103,10 @@ class StislaPreset extends Preset
         }
 
         if (! is_dir($directory = static::getViewPath('auth/passwords'))) {
+            mkdir($directory, 0755, true);
+        }
+
+        if (! is_dir($directory = resource_path('libraries'))) {
             mkdir($directory, 0755, true);
         }
     }
